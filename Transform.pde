@@ -1,11 +1,9 @@
 class Transform {
-
   PVector posicion;
   PVector escala;
 
-
-  public Transform (PVector posicion, PVector escala) {
-    this.posicion = posicion;
-    this.escala = escala;
+  Transform(float x, float y, float escalaX, float escalaY) {
+    posicion = new PVector(x, y);
+    escala = new PVector(escalaX, escalaY);
   }
 }

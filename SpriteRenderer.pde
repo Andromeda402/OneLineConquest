@@ -1,23 +1,25 @@
 class SpriteRenderer {
+  PImage imagen;
+  boolean imagenCargada = false;
 
-  Transform transform;
-  PImage sprite;
-
-
-
-
-
-  public SpriteRenderer(PImage sprite, Transform transform) {
-    this.sprite = sprite;
-    this.transform = transform;
+  SpriteRenderer(String ruta, float escalaX, float escalaY) {
+    cambiarImagen(ruta);
   }
 
-
-  public void render() {
-    image(sprite, transform.posicion.x, transform.posicion.y, transform.escala.x, transform.escala.y);
+  void cambiarImagen(String nuevaRuta) {
+    try {
+      imagen = loadImage(nuevaRuta);
+      imagen.resize((int)(imagen.width * 0.5), (int)(imagen.height * 0.5)); // Cambiar tamaño la imagen
+      imagenCargada = true; // Marca que la imagen está cargada
+    } catch (Exception e) {
+      println("No se pudo cargar la imagen: " + nuevaRuta);
+      imagenCargada = false; // Marca que la imagen no se ha cargado
+    }
   }
 
-  void setSprite(String newSprite) { //variable temporal
-    this.sprite = loadImage(newSprite);
+  void mostrar(float x, float y) {
+    if (imagenCargada) {
+      image(imagen, x, y);
+    }
   }
 }

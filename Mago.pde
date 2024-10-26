@@ -1,10 +1,18 @@
 class Mago extends Unidad {
+  
+  Mago(float x, float y, Edificio objetivo, color colorUnidad) {
+    super(x, y, objetivo, colorUnidad); // Llamar al constructor de Unidad
+    sprite = new SpriteRenderer("soldado.png", transform.escala.x, transform.escala.y); // Cargar el sprite específico
+  }
 
-  public Mago(PVector pos, PImage sprite, String nombre, String raza, int armadura, int costoOro, boolean esEnemigo) {
-    super(pos, sprite, nombre, raza, armadura, costoOro, esEnemigo);
-    this.vida = 150;
-    this.danio = 8;
-    this.velocidadAtaque = 6;
-    this.velocidadMovimiento = 4;
+  @Override
+  void mostrar() {
+    if (!sprite.imagenCargada) {
+      fill(colorUnidad); // Usar el color de la unidad
+      ellipse(transform.posicion.x, transform.posicion.y, 20, 20); // Dibujar el círculo
+    } else {
+      // Dibujar la unidad con la imagen
+      sprite.mostrar(transform.posicion.x, transform.posicion.y);
+    }
   }
 }
