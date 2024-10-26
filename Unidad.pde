@@ -8,7 +8,8 @@ class Unidad {
   float velocidadAtaque; // Velocidad de ataque
   int daño;          // Daño de ataque
   float tiempoUltimoAtaque = 0; // Tiempo desde el último ataque
-
+  
+  
   Unidad(float x, float y, Edificio objetivo, color colorUnidad) {
     // Inicializar Transform para la posición y escala
     transform = new Transform(x, y, 0.5, 0.5);  // Escala al 50%
@@ -16,7 +17,7 @@ class Unidad {
     this.colorUnidad = colorUnidad;
 
     // Inicializar el SpriteRenderer
-    sprite = new SpriteRenderer("soldado.png", transform.escala.x, transform.escala.y);
+    sprite = new SpriteRenderer("Soldado.png",transform);
 
     // Inicializar atributos de la unidad
     vida = 100;              // Vida inicial
@@ -51,7 +52,7 @@ class Unidad {
       ellipse(transform.posicion.x, transform.posicion.y, 20, 20); // Dibujar el círculo
     } else {
       // Dibujar la unidad con la imagen
-      sprite.mostrar(transform.posicion.x, transform.posicion.y);
+      sprite.mostrar();
     }
   }
 

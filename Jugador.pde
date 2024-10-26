@@ -14,7 +14,7 @@ class Jugador {
   void manejarEntrada() {
     // Jugador 1
     if (base.colorBase == color(0, 0, 255)) {
-      if (keyPressed && key == 'u' && !teclaPresionada) {
+      if (keyPressed && key == 'u' || key == 'U' && !teclaPresionada) {
         comprarUnidad();
         teclaPresionada = true;  // Marcar la tecla como presionada
       }
@@ -25,7 +25,7 @@ class Jugador {
 
     // Jugador 2
     if (base.colorBase == color(255, 0, 0)) {
-      if (keyPressed && key == 'i' && !teclaPresionada) {
+      if (keyPressed && key == 'i' || key == 'I' && !teclaPresionada) {
         comprarUnidad();
         teclaPresionada = true;  // Marcar la tecla como presionada
       }

@@ -2,7 +2,7 @@ class Soldado extends Unidad {
   
   Soldado(float x, float y, Edificio objetivo, color colorUnidad) {
     super(x, y, objetivo, colorUnidad); // Llamar al constructor de Unidad
-    sprite = new SpriteRenderer("soldado.png", transform.escala.x, transform.escala.y); // Cargar el sprite específico
+    sprite = new SpriteRenderer("Soldado.png",transform,50,50); // Cargar el sprite específico
   }
 
   @Override
@@ -12,7 +12,7 @@ class Soldado extends Unidad {
       ellipse(transform.posicion.x, transform.posicion.y, 20, 20); // Dibujar el círculo
     } else {
       // Dibujar la unidad con la imagen
-      sprite.mostrar(transform.posicion.x, transform.posicion.y);
+      sprite.mostrar();
     }
   }
 }

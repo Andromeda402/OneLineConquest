@@ -11,13 +11,15 @@ Jugador jugador2;
 MinaDeOro minaAliada;
 MinaDeOro minaEnemiga;
 
+PImage soldadoPrueba;
+
 void setup() {
 
   size(800, 800);
   gestorUnidades = new GestorUnidades();
   //soldado.displayRender();
   //soldado.cambiarImagen("Soldado.jpg");
-
+  soldadoPrueba = loadImage("Soldado.png");
   estadoJuego = 0;
   size(800, 600);
   baseAliada = new Edificio(width / 4, height / 2, color(0, 0, 255)); // Base aliada
@@ -55,7 +57,6 @@ void draw() {
 void menu() {
   fill(#132B50);
   text("HAZ CLICK PARA JUGAR", width/2, height/2, 80);
-  
 }
 
 void jugando() {
