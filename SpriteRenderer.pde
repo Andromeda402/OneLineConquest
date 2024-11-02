@@ -1,4 +1,4 @@
-class SpriteRenderer {
+  class SpriteRenderer {
   PImage imagen;
   boolean imagenCargada = false;
   Transform transform;
@@ -28,7 +28,7 @@ class SpriteRenderer {
   void mostrar() {
     if (imagenCargada) {
       imageMode(CENTER);
-      image(imagen, transform.posicion.x, transform.posicion.y,transform.escala.x,transform.escala.y );
+      image(imagen, transform.posicion.x, transform.posicion.y,transform.escala.x,transform.escala.y);
     }
   }
   

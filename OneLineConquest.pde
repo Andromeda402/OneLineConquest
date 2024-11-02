@@ -2,7 +2,6 @@
 
 int estadoJuego;
 GestorUnidades gestorUnidades;
-Soldado soldado;
 
 Edificio baseAliada;
 Edificio baseEnemiga;
@@ -15,13 +14,13 @@ PImage soldadoPrueba;
 
 void setup() {
 
-  size(800, 800);
+  size(1200, 800);
   gestorUnidades = new GestorUnidades();
   //soldado.displayRender();
   //soldado.cambiarImagen("Soldado.jpg");
   soldadoPrueba = loadImage("Soldado.png");
   estadoJuego = 0;
-  size(800, 600);
+  
   baseAliada = new Edificio(width / 4, height / 2, color(0, 0, 255)); // Base aliada
   baseEnemiga = new Edificio(3 * width / 4, height / 2, color(255, 0, 0)); // Base enemiga
   jugador1 = new Jugador(baseAliada, color(0, 0, 255), 100); // Jugador 1 empieza con 100 de oro
@@ -51,6 +50,7 @@ void draw() {
     derrota();
     break;
   }
+  
 }
 
 
@@ -62,6 +62,18 @@ void menu() {
 void jugando() {
   //gestorUnidades.actualizarSoldados();
     // Dibujar bases y minas
+    
+    
+    
+    
+   
+
+  
+  
+  
+  
+  
+    
   baseAliada.mostrar();
   baseEnemiga.mostrar();
   minaAliada.mostrar();
@@ -78,6 +90,13 @@ void jugando() {
   // Actualizar y mostrar unidades
   baseAliada.actualizarUnidades();
   baseEnemiga.actualizarUnidades();
+  
+  
+  
+
+  
+  
+  
   // Comprobar si alguno de los edificios ha sido destruido
   if (baseAliada.vida <= 0) {
     fill(255, 0, 0);
@@ -106,6 +125,8 @@ void jugando() {
 
 
 
+
+
 void victoria() {
 }
 
@@ -122,4 +143,6 @@ void mousePressed() {
   //soldado.displayRender();
   //soldado.moverUnidad();
   }*/
+  
+
 }
