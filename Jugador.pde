@@ -1,68 +1,86 @@
 class Jugador {
   Edificio base;
-  Boton boton;
-  color colorUnidad;  // Color de las unidades del jugador
-  boolean teclaPresionada = false;  // Para controlar la compra de unidades
-  int oro;  // Cantidad de oro del jugador
-  int costoUnidad = 30; // Costo de una unidad
+  Boton botonSoldado;
+  Boton botonMago;
+  Boton botonArquero;
+  color colorUnidad;
+  int oro;
 
   Jugador(Edificio base, color colorUnidad, int oroInicial) {
     this.base = base;
     this.colorUnidad = colorUnidad;
     this.oro = oroInicial;
-    this.boton = new Boton(70, 200, "Reclutar soldado", "ReclutarSoldado.png", 1); //float x, float y,  String texto, String rutaImagen
+
+    this.botonSoldado = new Boton(70, 200, "Reclutar Soldado", "ReclutarSoldado.png", 2);
+    this.botonMago = new Boton(70, 340, "Reclutar Mago", "ReclutarMago.png", 10);
+    this.botonArquero = new Boton(70, 480, "Reclutar Arquero", "ReclutarArquera.png", 5);
   }
 
   void manejarEntrada() {
-    // Jugador 1
-    if (base.colorBase == color(0, 0, 255)) {
-      
-      dibujarBoton();
-      
-      if (keyPressed && key == 'u' || key == 'U' && !teclaPresionada) {
-        comprarUnidad();
-        teclaPresionada = true;  // Marcar la tecla como presionada
-      }
-      if (!keyPressed) {
-        teclaPresionada = false;  // Permitir otra compra cuando se libera la tecla
-      }
-    }
+     if (base.colorBase == color(0, 0, 255)) {
+    dibujarBotones();
 
-    // Jugador 2
-    if (base.colorBase == color(255, 0, 0)) {
-      if (keyPressed && key == 'i' || key == 'I' && !teclaPresionada) {
-        comprarUnidad();
-        teclaPresionada = true;  // Marcar la tecla como presionada
-      }
-      if (!keyPressed) {
-        teclaPresionada = false;  // Permitir otra compra cuando se libera la tecla
-      }
+    if (botonSoldado.estaPresionado()) {
+      comprarSoldado();
     }
-  }
-
-  void comprarUnidad() {
-    // Solo se puede comprar una unidad si el jugador tiene suficiente oro
-    if (oro >= costoUnidad) {
-      base.unidades.add(new Soldado(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad)); // Crear Soldado
-      oro -= costoUnidad;  // Restar el costo de la unidad
-      println("Unidad comprada! Oro restante: " + oro);
-    } else {
-      println("No hay suficiente oro para comprar una unidad!");
+    if (botonMago.estaPresionado()) {
+      comprarMago();
     }
-  }
-  
-  void dibujarBoton(){
-    boton.dibujarBoton();
-     if(oro >= costoUnidad && boton.estaPresionado()){
-      base.unidades.add(new Soldado(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad)); // Crear Soldado
-      oro -= costoUnidad;  // Restar el costo de la unidad
-      println("Unidad comprada! Oro restante: " + oro);
+    if (botonArquero.estaPresionado()) {
+      comprarArquero();
+    }
      }
+     
+       // Jugador 2
+    if (base.colorBase == color(255, 0, 0)) {
+      if (keyPressed && (key == 'i' || key == 'I')) {
+        comprarSoldado();
+      }
+      if (keyPressed && (key == 'k' || key == 'K')) {
+        comprarMago();
+      }
+      if (keyPressed && (key == 'l' || key == 'L')) {
+        comprarArquero();
+      }
+    }
   }
-  
-  
-  
-  
-  
-  
+
+  void comprarSoldado() {
+    if (oro >= Precio.SOLDADO) {
+      oro -= Precio.SOLDADO;
+      base.unidades.add(new Soldado(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
+      println("Soldado comprado! Oro restante: " + oro);
+    } else {
+      println("No hay suficiente oro para comprar un Soldado!");
+    }
+  }
+
+  void comprarMago() {
+    if (oro >= Precio.MAGO) {
+      oro -= Precio.MAGO;
+      base.unidades.add(new Mago(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
+      println("Mago comprado! Oro restante: " + oro);
+    } else {
+      println("No hay suficiente oro para comprar un Mago!");
+    }
+  }
+
+  void comprarArquero() {
+    if (oro >= Precio.ARQUERA) {
+      base.unidades.add(new Arquero(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
+       oro -= Precio.ARQUERA;
+      println("Arquero comprado! Oro restante: " + oro);
+    } else {
+      println("No hay suficiente oro para comprar un Arquero!");
+    }
+  }
+
+  void dibujarBotones() {
+    botonSoldado.dibujarBoton();
+     noTint();
+    botonMago.dibujarBoton();
+     noTint();
+    botonArquero.dibujarBoton();
+    noTint();
+  }
 }

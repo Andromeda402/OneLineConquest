@@ -9,6 +9,7 @@ Jugador jugador1;
 Jugador jugador2;
 MinaDeOro minaAliada;
 MinaDeOro minaEnemiga;
+ArrayList<Unidad> unidades;
 
 PImage soldadoPrueba;
 
@@ -23,10 +24,11 @@ void setup() {
   
   baseAliada = new Edificio(width / 4, height / 2, color(0, 0, 255)); // Base aliada
   baseEnemiga = new Edificio(3 * width / 4, height / 2, color(255, 0, 0)); // Base enemiga
-  jugador1 = new Jugador(baseAliada, color(0, 0, 255), 100); // Jugador 1 empieza con 100 de oro
+  jugador1 = new Jugador(baseAliada, color(0, 0, 255), 1000); // Jugador 1 empieza con 100 de oro
   jugador2 = new Jugador(baseEnemiga, color(255, 0, 0), 100); // Jugador 2 empieza con 100 de oro
   minaAliada = new MinaDeOro(width / 4, height / 2 + 200, color(0, 0, 255)); // Mina de oro aliada
   minaEnemiga = new MinaDeOro(3 * width / 4, height / 2 + 200, color(255, 0, 0)); // Mina de oro enemiga
+  unidades = new ArrayList<Unidad>();
 }
 
 void draw() {
@@ -86,12 +88,10 @@ void jugando() {
   // Manejar entrada del jugador
   jugador1.manejarEntrada();
   jugador2.manejarEntrada();
-
+ 
   // Actualizar y mostrar unidades
   baseAliada.actualizarUnidades();
   baseEnemiga.actualizarUnidades();
-  
-  
   
 
   
