@@ -29,28 +29,26 @@ class Boton {
     if (estaSobre()) {
       tint(#0C3090);
       while(this.transform.escala.x < 140 ){
-      this.transform.escala.x = this.transform.escala.x +0.01;
-      this.transform.escala.y = this.transform.escala.y +0.01;
+      this.transform.escala.x = this.transform.escala.x +0.00001;
+      this.transform.escala.y = this.transform.escala.y +0.00001;
       }
     } else {
       while(this.transform.escala.x >= 120 ){
-      this.transform.escala.x = this.transform.escala.x -0.01;
-      this.transform.escala.y = this.transform.escala.y -0.01;
+      this.transform.escala.x = this.transform.escala.x -0.00001;
+      this.transform.escala.y = this.transform.escala.y -0.00001;
       }
     }
       if (enCooldown()) {
       while(this.transform.escala.x >= 120 & this.transform.escala.y >= 120){
-      this.transform.escala.x = this.transform.escala.x -1;
-      this.transform.escala.y = this.transform.escala.y -1;
+      this.transform.escala.x = this.transform.escala.x -0.01;
+      this.transform.escala.y = this.transform.escala.y -0.01;
       }
-            // Aplicar una capa semitransparente
-      fill(0, 0, 0, 150);  // Semitransparente negro
+      fill(0, 0, 0, 150);
       rectMode(CENTER);
       rect(transform.posicion.x, transform.posicion.y, transform.escala.x/2-5, transform.escala.y/2-5);
       
-      // Mostrar temporizador de cooldown restante
       float tiempoRestante = (cooldown - (millis() - tiempoUltimaPresion)) / 1000.0;
-      fill(255);  // Color blanco para texto
+      fill(255); 
       textAlign(CENTER, CENTER);
       text(nf(tiempoRestante, 1, 1) + "s", transform.posicion.x, transform.posicion.y);
     }
