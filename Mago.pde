@@ -2,7 +2,7 @@ class Mago extends Unidad {
   
   Mago(float x, float y, Edificio objetivo, color colorUnidad) {
     super(x, y, objetivo, colorUnidad); // Llamar al constructor de Unidad
-    sprite = new SpriteRenderer("soldado.png",transform); // Cargar el sprite específico
+    sprite = new SpriteRenderer("Mago.png",transform,50,50); // Cargar el sprite específico
   }
 
   @Override

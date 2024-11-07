@@ -15,7 +15,6 @@ class Unidad {
     transform = new Transform(x, y, 0.5, 0.5);  // Escala al 50%
     this.objetivo = objetivo;
     this.colorUnidad = colorUnidad;
-
     // Inicializar el SpriteRenderer
     sprite = new SpriteRenderer("Soldado.png",transform);
 

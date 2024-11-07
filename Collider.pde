@@ -28,5 +28,10 @@ class Collider {
             unidad.transform.posicion.y < edificio.y + 25);
   }
  
-  
+  public boolean mouseSobre(float mouseX, float mouseY) {
+    float radioCirculo = this.transform.escala.x / 2;  // Radio del botón circular
+    float distancia = PVector.dist(this.transform.posicion, new PVector(mouseX, mouseY));
+    return distancia <= radioCirculo;
+}
+
 }
