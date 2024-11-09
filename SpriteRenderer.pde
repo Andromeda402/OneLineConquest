@@ -27,7 +27,7 @@ class SpriteRenderer {
 
   SpriteRenderer(String spriteSheet, Transform transform, float escalaX, float escalaY) {
 
-    this.velocidadAnimacion = 0.1;
+    this.velocidadAnimacion = 0.1; //velocidad reducida
     this.spriteSheet = requestImage(spriteSheet);
     this.xFrame=0;
     this.yFrame=0;
@@ -56,7 +56,7 @@ class SpriteRenderer {
     }
   }
 
-
+//metodo para mostrar imagenes sin animaciones
   void mostrarImagen () {
     imageMode(CENTER);
     image(imagen, transform.posicion.x, transform.posicion.y,transform.escala.x,transform.escala.y);
