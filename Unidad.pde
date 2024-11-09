@@ -1,15 +1,20 @@
 class Unidad {
-  Transform transform;
-  float velocidad = 2; // Velocidad de movimiento
-  Edificio objetivo;
-  SpriteRenderer sprite;
-  color colorUnidad;  // Color de la unidad
-  int vida;           // Vida de la unidad
-  float velocidadAtaque; // Velocidad de ataque
-  int daño;          // Daño de ataque
+  
+  /*-ATRIBUTOS-*/
+  
+  Transform transform;          // Posicion de la unidad
+  float velocidad = 2;          // Velocidad de movimiento
+  Edificio objetivo;            // Objetivo de la unidad
+  SpriteRenderer sprite;        // Sprite de la unidad
+  color colorUnidad;            // Color de la unidad
+  int vida;                     // Vida de la unidad
+  float velocidadAtaque;        // Velocidad de ataque
+  int daño;                     // Daño de ataque
   float tiempoUltimoAtaque = 0; // Tiempo desde el último ataque
   
+  /*-CONSTRUCTORES-*/
   
+  /* Contructor parametrizado */
   Unidad(float x, float y, Edificio objetivo, color colorUnidad) {
     // Inicializar Transform para la posición y escala
     transform = new Transform(x, y, 0.5, 0.5);  // Escala al 50%
@@ -19,11 +24,15 @@ class Unidad {
     sprite = new SpriteRenderer("Soldado.png",transform);
 
     // Inicializar atributos de la unidad
-    vida = 100;              // Vida inicial
+    vida = 100;             // Vida inicial
     velocidadAtaque = 1;    // Ataque por segundo
     daño = 10;              // Daño por ataque
   }
-
+  
+  
+  /* -- MÉTODOS -- */
+  
+  //Metodo mover la unidad
   void mover() {
     // Mover hacia la base objetivo
     if (dist(transform.posicion.x, transform.posicion.y, objetivo.x, objetivo.y) > 5) {
@@ -34,7 +43,8 @@ class Unidad {
       atacar(); // Atacar si está cerca del objetivo
     }
   }
-
+  
+  //Metodo para que ataque la unidad
   void atacar() {
     // Atacar al edificio objetivo
     if (millis() - tiempoUltimoAtaque >= 1000 / velocidadAtaque) {
@@ -43,7 +53,8 @@ class Unidad {
       println("Unidad atacó el edificio!");
     }
   }
-
+  
+  //Metodo para que se muestre la unidad en el lienzo
   void mostrar() {
     // Si la imagen no está disponible, se pinta un círculo del color correspondiente
     if (!sprite.imagenCargada) {
@@ -51,14 +62,16 @@ class Unidad {
       ellipse(transform.posicion.x, transform.posicion.y, 20, 20); // Dibujar el círculo
     } else {
       // Dibujar la unidad con la imagen
-      sprite.mostrar();
+      sprite.mostrarImagen();
     }
   }
-
+  
+  //Metodo para cambiar la imagen de la unidad
   void cambiarSprite(String nuevaImagen) {
     sprite.cambiarImagen(nuevaImagen);
   }
-
+  
+  //Metodo para que la unidad reciba daño
   void recibirDaño(int cantidad) {
     vida -= cantidad;  // Reducir vida por la cantidad de daño recibido
     if (vida <= 0) {
