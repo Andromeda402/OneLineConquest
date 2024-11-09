@@ -1,4 +1,9 @@
 //Archivo de Processing para el proyecto
+int numero1;
+int numero2;
+int numero3;
+
+
 
 int estadoJuego;
 GestorUnidades gestorUnidades;
