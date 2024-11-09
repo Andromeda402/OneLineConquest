@@ -1,8 +1,8 @@
 //Archivo de Processing para el proyecto
-
+boolean holaBorrar;
 int estadoJuego;
 GestorUnidades gestorUnidades;
-
+int holaBorrar2;
 Edificio baseAliada;
 Edificio baseEnemiga;
 Jugador jugador1;
@@ -111,7 +111,8 @@ void jugando() {
     textSize(32);
     textAlign(CENTER);
     text("¡Base Enemiga Destruida!", width / 2, height / 2);
-    noLoop();  // Detener el bucle de juego si se destruye la base
+    estadoJuego = MaquinaEstadosJuego.VICTORIA;
+    //noLoop();  // Detener el bucle de juego si se destruye la base
   }
 
   // Mostrar oro de los jugadores
@@ -128,6 +129,53 @@ void jugando() {
 
 
 void victoria() {
+  // Fondo con un color gradiente
+  for (int i = 0; i < height; i++) {
+    stroke(lerpColor(color(0, 100, 255), color(0, 200, 150), float(i) / height));
+    line(0, i, width, i);
+  }
+
+  // Dibujar un confeti animado (opcional)
+  for (int i = 0; i < 200; i++) {
+    fill(random(255), random(255), random(255));
+    ellipse(random(width), random(height), random(5, 10), random(5, 10));
+  }
+
+  // Título de la pantalla
+  textAlign(CENTER, CENTER);
+  textSize(80);
+  fill(255, 223, 0);
+  text("¡VICTORIA!", width / 2, height / 4);
+
+  // Mensaje de felicitación
+  textSize(32);
+  fill(255);
+  text("¡Felicidades, has ganado el juego!", width / 2, height / 2);
+
+  // Dibujar botón para jugar de nuevo
+  float botonX = width / 2 - 100;
+  float botonY = height * 0.65;
+  float botonAncho = 200;
+  float botonAlto = 60;
+
+  // Dibujar el botón
+  if (mouseX > botonX && mouseX < botonX + botonAncho && mouseY > botonY && mouseY < botonY + botonAlto) {
+    fill(0, 200, 100);  // Cambia de color si el mouse está sobre el botón
+    if (mousePressed) {
+      // Acción al hacer clic en el botón (reemplaza esta parte con la lógica que desees)
+      println("¡Jugar de nuevo!");
+    }
+  } else {
+    fill(0, 150, 80);
+  }
+  rect(botonX, botonY, botonAncho, botonAlto, 10);
+
+  // Texto del botón
+  fill(255);
+  textSize(24);
+  text("Jugar de nuevo", width / 2, botonY + botonAlto / 2);
+
+
 }
 
 void derrota() {
