@@ -49,8 +49,7 @@ class Collider {
   public boolean hayColCirculo(Collider colCirculo) {
 
     float distancia;    //Distancia entre el centro de los circulos
-    
-    
+
     //Calcula la distancia entre los centros de los circulos
     distancia = PVector.dist(this.transform.posicion, colCirculo.transform.posicion);
     //Calcula la suma de los radios de los circulos
@@ -76,4 +75,6 @@ class Collider {
     // Retorna verdadero si la distancia es menor o giaul que el radio del circulo
     return distancia <= radio;
   }
+  
+  
 }

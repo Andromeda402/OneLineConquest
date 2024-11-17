@@ -17,6 +17,7 @@ class Unidad {
   SpriteRenderer estadisticaUnidad;
   Transform estadisticaPos;
   
+  Unidad objetivoUnidad;
   /*-CONSTRUCTORES-*/
   
   /* Contructor parametrizado */
@@ -35,7 +36,7 @@ class Unidad {
     
     collider = new Collider (transform, 30);
     
-    
+    objetivoUnidad = null;
     this.estadisticaPos = new Transform (height-200, width-600, 2, 2);
     this.estadisticaUnidad = new SpriteRenderer("InterfazEstadisticas.png", estadisticaPos, 1200, 550);
     
@@ -44,8 +45,43 @@ class Unidad {
   
   /* -- MÉTODOS -- */
   
+   void detectarUnidad(ArrayList<Unidad> unidades) {
+    for (Unidad otraUnidad : unidades) {
+      if (otraUnidad != this && otraUnidad.colorUnidad != this.colorUnidad) {
+        if (this.collider.hayColCirculo(otraUnidad.collider)) {
+          objetivoUnidad = otraUnidad;
+          break;
+        }
+      }
+    }
+  }
+  
+  void atacarUnidad(Unidad otro) {
+    otro.recibirDaño(1);
+  }
+  
+  void recibirDaño(int daño) {
+    vida -= daño;
+  }
+  
+  boolean estaMuerto() {
+    return vida <= 0;
+  }
+  
   //Metodo mover la unidad
-  void mover() {
+  void mover(ArrayList<Unidad> unidades) {
+    
+    if (objetivoUnidad != null) {
+      if (!objetivoUnidad.estaMuerto()) {
+        atacarUnidad(objetivoUnidad);
+        return;
+      } else {
+        objetivoUnidad = null;
+      }
+    }
+    detectarUnidad(unidades);
+    
+    
     // Mover hacia la base objetivo
     if (dist(transform.posicion.x, transform.posicion.y, objetivo.x, objetivo.y) > 5) {
       float angulo = atan2(objetivo.y - transform.posicion.y, objetivo.x - transform.posicion.x);

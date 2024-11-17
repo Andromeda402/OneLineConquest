@@ -6,7 +6,6 @@ int holaBorrar2;
 Edificio baseAliada;
 Edificio baseEnemiga;
 Jugador jugador1;
-Jugador jugador2;
 MinaDeOro minaAliada;
 MinaDeOro minaEnemiga;
 ArrayList<Unidad> unidades;
@@ -25,9 +24,7 @@ void setup() {
   baseAliada = new Edificio(width / 4, height / 2, color(0, 0, 255)); // Base aliada
   baseEnemiga = new Edificio(3 * width / 4, height / 2, color(255, 0, 0)); // Base enemiga
   jugador1 = new Jugador(baseAliada, color(0, 0, 255), 1000); // Jugador 1 empieza con 100 de oro
-  jugador2 = new Jugador(baseEnemiga, color(255, 0, 0), 100); // Jugador 2 empieza con 100 de oro
   minaAliada = new MinaDeOro(width / 4, height / 2 + 200, color(0, 0, 255)); // Mina de oro aliada
-  minaEnemiga = new MinaDeOro(3 * width / 4, height / 2 + 200, color(255, 0, 0)); // Mina de oro enemiga
   unidades = new ArrayList<Unidad>();
 }
 
@@ -68,21 +65,33 @@ void jugando() {
   baseAliada.mostrar();
   baseEnemiga.mostrar();
   minaAliada.mostrar();
-  minaEnemiga.mostrar();
+
 
   // Generar oro para ambos jugadores
   minaAliada.generarOro(jugador1);
-  minaEnemiga.generarOro(jugador2);
+
+baseEnemiga.actualizarBaseEnemiga(unidades,baseAliada);
 
   // Manejar entrada del jugador
-  jugador1.manejarEntrada();
-  jugador2.manejarEntrada();
+  jugador1.manejarEntrada(unidades);
  
-  // Actualizar y mostrar unidades
-  baseAliada.actualizarUnidades();
-  baseEnemiga.actualizarUnidades();
-  
-  
+   for (int i = unidades.size() - 1; i >= 0; i--) { // Itera en reversa para eliminar unidades
+      Unidad unidad = unidades.get(i); // Obtiene la unidad actual de la lista
+      unidad.mover(unidades);                  // Mueve la unidad
+      unidad.mostrar();                // Muestra la unidad
+      
+      
+      
+      unidad.mostrarInformacion();
+      unidad.mostrarInterfazUnidad();
+      
+      unidad.collider.dibujarCollider();
+      
+      
+      if (unidad.estaMuerto()) { 
+        unidades.remove(i);            // Remover unidad si su vida es 0
+      }
+    }
 
   
   
@@ -116,7 +125,6 @@ void jugando() {
   textAlign(LEFT);
   text("Oro Jugador 1: " + jugador1.oro, 10, 20);
   textAlign(RIGHT);
-  text("Oro Jugador 2: " + jugador2.oro, width - 10, 20);
 }
 
 

@@ -1,7 +1,6 @@
 class Jugador {
 
   /*ATRIBUTOS*/
-  
   Edificio base;      // Base para cada jugador
   Boton botonSoldado; // Boton para reclutar Soldado
   Boton botonMago;    // Boton para reclutar Mago
@@ -16,7 +15,6 @@ class Jugador {
     this.base = base;                // Asigna la base para cada jugador
     this.colorUnidad = colorUnidad;  // Asigna el color de las unidades
     this.oro = oroInicial;           // Asigna el oro inicial
-    
     //Se inicializan los botones para reclutar a las unidades con sus respectivas posiciones, sprites y el tiempo de recarga
     this.botonSoldado = new Boton(70, 200, "Reclutar Soldado", "ReclutarSoldado.png", 2);
     this.botonMago = new Boton(70, 340, "Reclutar Mago", "ReclutarMago.png", 10);
@@ -27,47 +25,34 @@ class Jugador {
   /*-METODOS-*/
   
   //Metodo para manejar el celutamiento de las unidades
-  void manejarEntrada() {
+  void manejarEntrada(ArrayList<Unidad> unidades) {
+
     //Jugador 1 (azul) usa los botones para reclutar
     if (base.colorBase == color(0, 0, 255)) {
       dibujarBotones(); //Dibuja los botones en pantalla
-      
-      
       //Recluta Soldado si el cursor esta presionado
       if (botonSoldado.estaPresionado()) {
-        comprarSoldado();
+        comprarSoldado(unidades);
       }
       //Recluta Mago si el cursor esta presionado
       if (botonMago.estaPresionado()) {
-        comprarMago();
+        comprarMago(unidades);
       }
       //Recluta Arquero si el cursor esta presionado
       if (botonArquero.estaPresionado()) {
-        comprarArquero();
+        comprarArquero(unidades);
       }
     }
 
-    // Jugador 2 (rojo) usa teclas para presionar 
-    if (base.colorBase == color(255, 0, 0)) {
-      //Se agregan condiciones para verificar que la tecla este presionada 
-      //tambien se incluye "o" en cada condicion para incluir minusculas y mayusculas
-      if (keyPressed && (key == 'i' || key == 'I')) {
-        comprarSoldado();
-      }
-      if (keyPressed && (key == 'k' || key == 'K')) {
-        comprarMago();
-      }
-      if (keyPressed && (key == 'l' || key == 'L')) {
-        comprarArquero();
-      }
-    }
+
+      
   }
   
   //Metodo para comprar Soldado
-  void comprarSoldado() {
+  void comprarSoldado(ArrayList<Unidad> unidades) {
     if (oro >= Precio.SOLDADO) { // Verifica si el jugador tiene suficiente oro
       oro -= Precio.SOLDADO;
-      base.unidades.add(new Soldado(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
+      unidades.add(new Soldado(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
       println("Soldado comprado! Oro restante: " + oro);
     } else {
       println("No hay suficiente oro para comprar un Soldado!");
@@ -75,10 +60,10 @@ class Jugador {
   }
   
   //Metodo para comprar Mago
-  void comprarMago() {
+  void comprarMago(ArrayList<Unidad> unidades) {
     if (oro >= Precio.MAGO) { // Verifica si el jugador tiene suficiente oro
       oro -= Precio.MAGO;
-      base.unidades.add(new Mago(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
+      unidades.add(new Mago(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
       println("Mago comprado! Oro restante: " + oro);
     } else {
       println("No hay suficiente oro para comprar un Mago!");
@@ -86,9 +71,9 @@ class Jugador {
   }
   
   //Metodo para comprar Arquero
-  void comprarArquero() {
+  void comprarArquero(ArrayList<Unidad> unidades) {
     if (oro >= Precio.ARQUERA) { // Verifica si el jugador tiene suficiente oro
-      base.unidades.add(new Arquero(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
+      unidades.add(new Arquero(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
       oro -= Precio.ARQUERA;
       println("Arquero comprado! Oro restante: " + oro);
     } else {

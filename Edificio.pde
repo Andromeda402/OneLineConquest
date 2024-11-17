@@ -1,9 +1,7 @@
 class Edificio {
   float x, y;                 // Coordenadas del edificio
   int vida;                   // Vida del edificio
-  ArrayList<Unidad> unidades; // Lista de unidades
   color colorBase;            // Color del edificio
-  
   Collider collider;
   
   /*-CONSTRUCTORES-*/
@@ -13,7 +11,6 @@ class Edificio {
     this.x = x;                              // Asigna la posicion x
     this.y = y;                              // Asigna la posicion y
     this.vida = 500;                         // Vida inicial del edificio
-    this.unidades = new ArrayList<Unidad>(); // Inicializa la lista de unidades como vacia
     this.colorBase = colorBase;              // Asigna el color del edificio
   }
   
@@ -30,27 +27,21 @@ class Edificio {
     text("Vida: " + vida, x, y + 80); // Mostrar la vida del edificio
   }
   
-  /*Actualiza la lista de Unidades*/
-  void actualizarUnidades() {
-    for (int i = unidades.size() - 1; i >= 0; i--) { // Itera en reversa para eliminar unidades
-      Unidad unidad = unidades.get(i); // Obtiene la unidad actual de la lista
-      unidad.mover();                  // Mueve la unidad
-      unidad.mostrar();                // Muestra la unidad
-      
-      
-      
-      unidad.mostrarInformacion();
-      unidad.mostrarInterfazUnidad();
-      
-      unidad.collider.dibujarCollider();
-      
-      
-      if (unidad.vida <= 0) {          // Si la unidad es menor o igual a 0
-        unidades.remove(i);            // Remover unidad si su vida es 0
+  void actualizarBaseEnemiga(ArrayList<Unidad> unidades, Edificio baseJugador){
+    
+  //Se agregan condiciones para verificar que la tecla este presionada 
+      //tambien se incluye "o" en cada condicion para incluir minusculas y mayusculas
+      if (keyPressed && (key == 'i' || key == 'I')) {
+          unidades.add(new Soldado(this.x, this.y, baseJugador, colorBase));
       }
-    }
-  }
+      if (keyPressed && (key == 'k' || key == 'K')) {
+        unidades.add(new Arquero(this.x, this.y, baseJugador, colorBase));
+      }
+      if (keyPressed && (key == 'l' || key == 'L')) {
+        unidades.add(new Mago(this.x, this.y, baseJugador, colorBase));
+      }
   
+  }
   //Resta la vida del edifico en funcio de la cantidad del daño
   void recibirDanio(int cantidad) {
     vida -= cantidad;                 // Resta la vida edificio por la cantidad de daño recibido
