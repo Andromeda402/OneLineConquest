@@ -65,17 +65,6 @@ void jugando() {
   //gestorUnidades.actualizarSoldados();
     // Dibujar bases y minas
     
-    
-    
-    
-   
-
-  
-  
-  
-  
-  
-    
   baseAliada.mostrar();
   baseEnemiga.mostrar();
   minaAliada.mostrar();
@@ -92,6 +81,12 @@ void jugando() {
   // Actualizar y mostrar unidades
   baseAliada.actualizarUnidades();
   baseEnemiga.actualizarUnidades();
+  
+  
+
+  
+  
+  
   
 
   

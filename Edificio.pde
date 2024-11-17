@@ -4,6 +4,8 @@ class Edificio {
   ArrayList<Unidad> unidades; // Lista de unidades
   color colorBase;            // Color del edificio
   
+  Collider collider;
+  
   /*-CONSTRUCTORES-*/
   
   /*Constructor parametrizado*/
@@ -34,6 +36,15 @@ class Edificio {
       Unidad unidad = unidades.get(i); // Obtiene la unidad actual de la lista
       unidad.mover();                  // Mueve la unidad
       unidad.mostrar();                // Muestra la unidad
+      
+      
+      
+      unidad.mostrarInformacion();
+      unidad.mostrarInterfazUnidad();
+      
+      unidad.collider.dibujarCollider();
+      
+      
       if (unidad.vida <= 0) {          // Si la unidad es menor o igual a 0
         unidades.remove(i);            // Remover unidad si su vida es 0
       }
@@ -41,7 +52,7 @@ class Edificio {
   }
   
   //Resta la vida del edifico en funcio de la cantidad del daño
-  void recibirDaño(int cantidad) {
+  void recibirDanio(int cantidad) {
     vida -= cantidad;                 // Resta la vida edificio por la cantidad de daño recibido
     if (vida <= 0) {                  // Condiciona si la vida es menor o igual a 0
       println("Edificio destruido!"); // Imprime mensaje cuando se destruye el edificio

@@ -5,7 +5,8 @@ class Arquero extends Unidad {
   /*Constructor parametrizado*/
   Arquero(float x, float y, Edificio objetivo, color colorUnidad) {
     super(x, y, objetivo, colorUnidad);                          // Llama al constructor de la clase padre Unidad
-    sprite = new SpriteRenderer("Arquera Sprite-Sheet.png", transform,0.3,0.3); // Carga el sprite de la arquera
+    this.collider.radio = 10;
+    sprite = new SpriteRenderer("Arquera Sprite-Sheet.png", transform,0.2,0.2); // Carga el sprite de la arquera
   }
   
   
