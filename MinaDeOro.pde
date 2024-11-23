@@ -20,10 +20,10 @@ class MinaDeOro extends Edificio {
   void mostrar() {
     fill(255, 215, 0);  // Color dorado para la mina de oro
     rectMode(CENTER);
-    rect(x, y, 40, 40);  // Dibujar la mina
+    rect(this.transform.posicion.x, this.transform.posicion.y, 40, 40);  // Dibujar la mina
     fill(0);
     textSize(30);
     textAlign(CENTER);
-    text("Mina de Oro", x, y + 60);  // Mostrar nombre del edificio
+    text("Mina de Oro", this.transform.posicion.x, this.transform.posicion.y + 60);  // Mostrar nombre del edificio
   }
 }

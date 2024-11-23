@@ -56,7 +56,12 @@ class Unidad {
     }
   }
   
+  boolean detectarEdificio(Collider collider, Edificio objetivo){
+    return collider.hayColCirculo(objetivo.collider);
+  }
+  
   void atacarUnidad(Unidad otro) {
+    sprite.mostrarAnimacion(2);
     otro.recibirDaño(1);
   }
   
@@ -65,6 +70,7 @@ class Unidad {
   }
   
   boolean estaMuerto() {
+    
     return vida <= 0;
   }
   
@@ -76,6 +82,7 @@ class Unidad {
         atacarUnidad(objetivoUnidad);
         return;
       } else {
+        
         objetivoUnidad = null;
       }
     }
@@ -83,23 +90,29 @@ class Unidad {
     
     
     // Mover hacia la base objetivo
-    if (dist(transform.posicion.x, transform.posicion.y, objetivo.x, objetivo.y) > 5) {
-      float angulo = atan2(objetivo.y - transform.posicion.y, objetivo.x - transform.posicion.x);
-      transform.posicion.x += cos(angulo) * velocidad;
-      transform.posicion.y += sin(angulo) * velocidad;
-    } else {
-      atacar(); // Atacar si está cerca del objetivo
-    }
+     if(detectarEdificio(this.collider, this.objetivo)){
+      
+      
+    atacarEdificio(); // Atacar si está cerca del objetivo
+    return;
+     }
+     float angulo = atan2(objetivo.transform.posicion.y - transform.posicion.y, objetivo.transform.posicion.x - transform.posicion.x);
+     transform.posicion.x += cos(angulo) * velocidad;
+     transform.posicion.y += sin(angulo) * velocidad;
   }
   
   //Metodo para que ataque la unidad
-  void atacar() {
+  void atacarEdificio() {
     // Atacar al edificio objetivo
-    if (millis() - tiempoUltimoAtaque >= 1000 / velocidadAtaque) {
+    if (this.collider.hayColCirculo(objetivo.collider)) {
+      if (millis() - tiempoUltimoAtaque >= 1000 / velocidadAtaque) {
+      
       objetivo.recibirDanio(danio); // Aplicar daño al edificio
       tiempoUltimoAtaque = millis();
       println("Unidad atacó el edificio!");
     }
+    }
+    
   }
   
   //Metodo para que se muestre la unidad en el lienzo
@@ -128,6 +141,7 @@ class Unidad {
   void recibirDanio(int cantidad) {
     vida -= cantidad;  // Reducir vida por la cantidad de daño recibido
     if (vida <= 0) {
+      
       println("Unidad destruida!");
     }
   }

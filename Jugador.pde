@@ -52,7 +52,7 @@ class Jugador {
   void comprarSoldado(ArrayList<Unidad> unidades) {
     if (oro >= Precio.SOLDADO) { // Verifica si el jugador tiene suficiente oro
       oro -= Precio.SOLDADO;
-      unidades.add(new Soldado(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
+      unidades.add(new Soldado(base.transform.posicion.x, base.transform.posicion.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
       println("Soldado comprado! Oro restante: " + oro);
     } else {
       println("No hay suficiente oro para comprar un Soldado!");
@@ -63,7 +63,7 @@ class Jugador {
   void comprarMago(ArrayList<Unidad> unidades) {
     if (oro >= Precio.MAGO) { // Verifica si el jugador tiene suficiente oro
       oro -= Precio.MAGO;
-      unidades.add(new Mago(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
+      unidades.add(new Mago(base.transform.posicion.x, base.transform.posicion.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
       println("Mago comprado! Oro restante: " + oro);
     } else {
       println("No hay suficiente oro para comprar un Mago!");
@@ -73,7 +73,7 @@ class Jugador {
   //Metodo para comprar Arquero
   void comprarArquero(ArrayList<Unidad> unidades) {
     if (oro >= Precio.ARQUERA) { // Verifica si el jugador tiene suficiente oro
-      unidades.add(new Arquero(base.x, base.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
+      unidades.add(new Arquero(base.transform.posicion.x, base.transform.posicion.y, (base.colorBase == color(0, 0, 255)) ? baseEnemiga : baseAliada, colorUnidad));
       oro -= Precio.ARQUERA;
       println("Arquero comprado! Oro restante: " + oro);
     } else {

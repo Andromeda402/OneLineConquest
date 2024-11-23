@@ -58,15 +58,8 @@ class Collider {
     return distancia <= radios; //retorna verdadero cuando los circulos hacen contacto
   }
     
-  //Metodo para verificar la coloision entre la unidad y el edificio
-  boolean colisionUnidadEdificio(Unidad unidad, Edificio edificio) {
-    // Verificar si la unidad está en contacto con el edificio
-    return (unidad.transform.posicion.x > edificio.x - 25 &&
-      unidad.transform.posicion.x < edificio.x + 25 &&
-      unidad.transform.posicion.y > edificio.y - 25 &&
-      unidad.transform.posicion.y < edificio.y + 25);
-  }
-  
+ 
+
   //Metodo para verificar si el cursor esta sobre el area del circulo
   public boolean mouseSobre(float mouseX, float mouseY) {
 

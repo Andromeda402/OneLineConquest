@@ -32,8 +32,8 @@ class SpriteRenderer {
     this.xFrame=0;
     this.yFrame=0;
     
-    this.anchoFrame = 320;
-    this.altoFrame = 320;
+    this.anchoFrame = 32; //320
+    this.altoFrame = 32; //320
 
     this.transform = transform;
     this.transform.escala.x = escalaX;
@@ -77,7 +77,33 @@ class SpriteRenderer {
         //image(imagen, transform.posicion.x, transform.posicion.y, transform.escala.x, transform.escala.y);
         moverSprite();
         break;
+        
+
       }
+      
+       case Animacion.ANIMACION_CAMINAR:{
+        this.yFrame = this.altoFrame;
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), transform.posicion.x, transform.posicion.y, this.anchoFrame * transform.escala.x, this.altoFrame * transform.escala.x);
+        //image(imagen, transform.posicion.x, transform.posicion.y, transform.escala.x, transform.escala.y);
+        moverSprite();
+        break;
+      }
+      
+        case Animacion.ANIMACION_ATAQUE:{
+        this.yFrame = this.altoFrame*2;
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), transform.posicion.x, transform.posicion.y, this.anchoFrame * transform.escala.x, this.altoFrame * transform.escala.x);
+        //image(imagen, transform.posicion.x, transform.posicion.y, transform.escala.x, transform.escala.y);
+        moverSprite();
+        break;
+      }
+        case Animacion.ANIMACION_MUERTE:{
+        this.yFrame = this.altoFrame*3;
+        image(this.spriteSheet.get(this.xFrame, this.yFrame, this.anchoFrame, this.altoFrame), transform.posicion.x, transform.posicion.y, this.anchoFrame * transform.escala.x, this.altoFrame * transform.escala.x);
+        //image(imagen, transform.posicion.x, transform.posicion.y, transform.escala.x, transform.escala.y);
+        moverSprite();
+        break;
+      }
+      
     }
   }
   

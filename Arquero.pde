@@ -1,12 +1,18 @@
 class Arquero extends Unidad {
   
-  /*-CONSTRUCTORES-*/
+  Collider colliderProyectil;
+  
+  
+  
+  
+  /*-CONSTRUCTORES-*/  
   
   /*Constructor parametrizado*/
   Arquero(float x, float y, Edificio objetivo, color colorUnidad) {
     super(x, y, objetivo, colorUnidad);                          // Llama al constructor de la clase padre Unidad
     this.collider.radio = 10;
-    sprite = new SpriteRenderer("Arquera Sprite-Sheet.png", transform,0.2,0.2); // Carga el sprite de la arquera
+    this.colliderProyectil = new Collider(this.transform,100);
+    sprite = new SpriteRenderer("Sprite-SheetArquera.png", transform, 4, 4); // Carga el sprite de la arquera
   }
   
   
@@ -19,7 +25,20 @@ class Arquero extends Unidad {
       fill(colorUnidad);                                           // Aplica el colo usando el color de la unidad
       ellipse(transform.posicion.x, transform.posicion.y, 20, 20); // Dibuja a la unidad como utilizando un circulo
     } else {
-      sprite.mostrarAnimacion(0);                                            //Muestra el sprite Arquera
+      sprite.mostrarAnimacion(1);                                            //Muestra el sprite Arquera
     }
   }
+  
+     void detectarUnidad(ArrayList<Unidad> unidades) {
+    for (Unidad otraUnidad : unidades) {
+      if (otraUnidad != this && otraUnidad.colorUnidad != this.colorUnidad) {
+        if (this.colliderProyectil.hayColCirculo(otraUnidad.collider)) {
+          objetivoUnidad = otraUnidad;
+          break;
+        }
+      }
+    }
+  }
+  
+  
 }

@@ -1,3 +1,12 @@
+import gifAnimation.*;
+
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 //Archivo de Processing para el proyecto
 boolean holaBorrar;
 int estadoJuego;
@@ -9,8 +18,16 @@ Jugador jugador1;
 MinaDeOro minaAliada;
 MinaDeOro minaEnemiga;
 ArrayList<Unidad> unidades;
-
+SpriteRenderer sprite;
 PImage soldadoPrueba;
+
+Minim minim;
+
+AudioPlayer musicaVictoria;
+
+Gif gif;
+
+
 
 void setup() {
 
@@ -21,11 +38,20 @@ void setup() {
   soldadoPrueba = loadImage("Soldado.png");
   estadoJuego = 0;
   
+  minim = new Minim(this);
+  
+  gif = new Gif(this,"animacion.gif");
+  
+  
+  
+  this.musicaVictoria = minim.loadFile("musicaVictoria.mp3");
+  
   baseAliada = new Edificio(width / 4, height / 2, color(0, 0, 255)); // Base aliada
   baseEnemiga = new Edificio(3 * width / 4, height / 2, color(255, 0, 0)); // Base enemiga
   jugador1 = new Jugador(baseAliada, color(0, 0, 255), 1000); // Jugador 1 empieza con 100 de oro
   minaAliada = new MinaDeOro(width / 4, height / 2 + 200, color(0, 0, 255)); // Mina de oro aliada
   unidades = new ArrayList<Unidad>();
+  
 }
 
 void draw() {
@@ -56,11 +82,17 @@ void draw() {
 void menu() {
   fill(#132B50);
   text("HAZ CLICK PARA JUGAR", width/2, height/2, 80);
+  
+  imageMode(CENTER);
+  image(gif,width/2,height/2);
+  gif.play();
 }
 
 void jugando() {
   //gestorUnidades.actualizarSoldados();
     // Dibujar bases y minas
+    
+  
     
   baseAliada.mostrar();
   baseEnemiga.mostrar();
@@ -89,6 +121,8 @@ baseEnemiga.actualizarBaseEnemiga(unidades,baseAliada);
       
       
       if (unidad.estaMuerto()) { 
+        //sprite.mostrarAnimacion(3);
+
         unidades.remove(i);            // Remover unidad si su vida es 0
       }
     }
@@ -132,6 +166,10 @@ baseEnemiga.actualizarBaseEnemiga(unidades,baseAliada);
 
 
 void victoria() {
+  
+  
+  
+  musicaVictoria.play();
 
 
 }
